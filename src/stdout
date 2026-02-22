@@ -1,0 +1,170 @@
+=====  AdjointTests.cpp
+==================
+=====  cvt_basic.cpp
+cvt_basic.o: source.h cvt_basic.cpp
+	$(CC) -c cvt_basic.cpp -o cvt_basic.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  cvt.cpp
+cvt.o: source.h cvt.cpp
+	$(CC) -c cvt.cpp -o cvt.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  ExperimentVertTrans.cpp
+==================
+=====  FTtest.cpp
+==================
+=====  HorizAdjointTest.cpp
+==================
+=====  HorizImpliedCov.cpp
+==================
+=====  ImpliedCov.cpp
+Master_ImpliedCov.o: source.h Master_ImpliedCov.cpp
+	$(CC) -c Master_ImpliedCov.cpp -o Master_ImpliedCov.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  inout.cpp
+inout.o: source.h inout.cpp
+	$(CC) -c inout.cpp -o inout.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  InProgress.cpp
+==================
+=====  interpolate.cpp
+interpolate.o: source.h interpolate.cpp
+	$(CC) -c interpolate.cpp -o interpolate.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  IntWithWeights.cpp
+==================
+=====  Master_AdjointTests.cpp
+==================
+=====  Master_AdjointTests_CVT.cpp
+Master_AdjointTests_CVT.o: source.h Master_AdjointTests_CVT.cpp
+	$(CC) -c Master_AdjointTests_CVT.cpp -o Master_AdjointTests_CVT.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_AdjointTestsObOps.cpp
+Master_AdjointTestsObOps.o: source.h Master_AdjointTestsObOps.cpp
+	$(CC) -c Master_AdjointTestsObOps.cpp -o Master_AdjointTestsObOps.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_AdjointTests_SemiLagrangian.cpp
+Master_AdjointTests_SemiLagrangian.o: source.h Master_AdjointTests_SemiLagrangian.cpp
+	$(CC) -c Master_AdjointTests_SemiLagrangian.cpp -o Master_AdjointTests_SemiLagrangian.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_AdjointTests_SL+ObsOp.cpp
+Master_AdjointTests_SL+ObsOp.o: source.h Master_AdjointTests_SL+ObsOp.cpp
+	$(CC) -c Master_AdjointTests_SL+ObsOp.cpp -o Master_AdjointTests_SL+ObsOp.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_Assimilate.cpp
+Master_Assimilate.o: source.h Master_Assimilate.cpp
+	$(CC) -c Master_Assimilate.cpp -o Master_Assimilate.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_CalcError.cpp
+Master_CalcError.o: source.h Master_CalcError.cpp
+	$(CC) -c Master_CalcError.cpp -o Master_CalcError.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_ForwardTraj.cpp
+Master_ForwardTraj.o: source.h Master_ForwardTraj.cpp
+	$(CC) -c Master_ForwardTraj.cpp -o Master_ForwardTraj.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_GenerateObs.cpp
+Master_GenerateObs.o: source.h Master_GenerateObs.cpp
+	$(CC) -c Master_GenerateObs.cpp -o Master_GenerateObs.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_GradTest.cpp
+Master_GradTest.o: source.h Master_GradTest.cpp
+	$(CC) -c Master_GradTest.cpp -o Master_GradTest.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_ImpliedCov.cpp
+Master_ImpliedCov.o: source.h Master_ImpliedCov.cpp
+	$(CC) -c Master_ImpliedCov.cpp -o Master_ImpliedCov.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_InverseTests_CVT.cpp
+Master_InverseTests_CVT.o: source.h Master_InverseTests_CVT.cpp
+	$(CC) -c Master_InverseTests_CVT.cpp -o Master_InverseTests_CVT.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_Invicat2Enviflux.cpp
+Master_Invicat2Enviflux.o: source.h Master_Invicat2Enviflux.cpp
+	$(CC) -c Master_Invicat2Enviflux.cpp -o Master_Invicat2Enviflux.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_MakeBG.cpp
+Master_MakeBG.o: source.h Master_MakeBG.cpp
+	$(CC) -c Master_MakeBG.cpp -o Master_MakeBG.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_MakeFields.cpp
+Master_MakeFields.o: source.h Master_MakeFields.cpp
+	$(CC) -c Master_MakeFields.cpp -o Master_MakeFields.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_MakeWinds.cpp
+Master_MakeWinds.o: source.h Master_MakeWinds.cpp
+	$(CC) -c Master_MakeWinds.cpp -o Master_MakeWinds.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_ReplaceFirstField.cpp
+Master_ReplaceFirstField.o: source.h Master_ReplaceFirstField.cpp
+	$(CC) -c Master_ReplaceFirstField.cpp -o Master_ReplaceFirstField.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  ~Master_RunForecast.cpp
+==================
+=====  Master_SemiLagrangian.cpp
+Master_SemiLagrangian.o: source.h Master_SemiLagrangian.cpp
+	$(CC) -c Master_SemiLagrangian.cpp -o Master_SemiLagrangian.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_TestReadWrite.cpp
+Master_TestReadWrite.o: source.h Master_TestReadWrite.cpp
+	$(CC) -c Master_TestReadWrite.cpp -o Master_TestReadWrite.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Master_WorldFlux.cpp
+==================
+=====  misc.cpp
+misc.o: source.h misc.cpp
+	$(CC) -c misc.cpp -o misc.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  ObsOperators.cpp
+ObsOperators.o: source.h ObsOperators.cpp
+	$(CC) -c ObsOperators.cpp -o ObsOperators.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  PenAndGrad.cpp
+PenAndGrad.o: source.h PenAndGrad.cpp
+	$(CC) -c PenAndGrad.cpp -o PenAndGrad.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  program_arguments.cpp
+program_arguments.o: source.h program_arguments.cpp
+	$(CC) -c program_arguments.cpp -o program_arguments.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  Satellite.cpp
+==================
+=====  Sattelite0.cpp
+==================
+=====  SphericalAdjointTest.cpp
+==================
+=====  SphericalInverseTest.cpp
+==================
+=====  Temp1.cpp
+==================
+=====  TemporalAdjointTest.cpp
+==================
+=====  test0.cpp
+==================
+=====  test1.cpp
+==================
+=====  test2.cpp
+==================
+=====  test3.cpp
+==================
+=====  TestAdjoint_Simple.cpp
+==================
+=====  test.cpp
+==================
+=====  TestCubicInt1D.cpp
+==================
+=====  TestCubicInt.cpp
+==================
+=====  TestCubicInt_LanczosBookExample.cpp
+==================
+=====  TestIndex.cpp
+==================
+=====  trajectory.cpp
+trajectory.o: source.h trajectory.cpp
+	$(CC) -c trajectory.cpp -o trajectory.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  transport_model.cpp
+transport_model.o: source.h transport_model.cpp
+	$(CC) -c transport_model.cpp -o transport_model.o -I. $(ARRBOUNDCHECK) $(OPTIMISE)
+==================
+=====  VertTemporalAdjointTest.cpp
+==================

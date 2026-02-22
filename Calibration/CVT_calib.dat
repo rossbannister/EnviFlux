@@ -1,0 +1,57 @@
+netcdf CVT_calib {
+dimensions:
+	x_tomcat = 64 ;
+	y_tomcat = 32 ;
+	z_tomcat = 24 ;
+	x_sh = 65 ;
+	y_sh = 33 ;
+	vertmode = 24 ;
+	month = 3 ;
+	timescale = 3 ;
+	fluxfield = 1 ;
+	tot_wn = 33 ;
+	options = 1 ;
+	GaussianCoLats = 33 ;
+variables:
+	double x_tomcat(x_tomcat) ;
+	double y_tomcat(y_tomcat) ;
+	double z_tomcat(z_tomcat) ;
+	double x_sh(x_sh) ;
+	double y_sh(y_sh) ;
+	double vertmode(vertmode) ;
+	double month(month) ;
+	double timescale(timescale) ;
+	double fluxfield(fluxfield) ;
+	double totwn(tot_wn) ;
+	int options(options) ;
+	double GaussianCoLats(GaussianCoLats) ;
+	double FracOfPrior_tracer(options) ;
+	double FracOfPrior_flux(options) ;
+	double std_tracer(z_tomcat, x_tomcat, y_tomcat) ;
+	double std_flux(fluxfield, month, x_tomcat, y_tomcat) ;
+	int horiztracer_cor_tpe(options) ;
+	double lengthscale_tracer(z_tomcat) ;
+	double horizcors_tracer(z_tomcat, y_sh) ;
+	double var_hspec_tracer(z_tomcat, tot_wn) ;
+	double std_hspec_tracer(z_tomcat, tot_wn) ;
+	int horizflux_cor_tpe(fluxfield) ;
+	double lengthscale_flux(fluxfield, month) ;
+	double horizcors_flux(fluxfield, month, y_sh) ;
+	double var_hspec_flux(fluxfield, month, tot_wn) ;
+	double std_hspec_flux(fluxfield, month, tot_wn) ;
+	int ForceVCorr(options) ;
+	int vert_covs(options) ;
+	double glob_av_vert_cov(z_tomcat, z_tomcat) ;
+	double vert_eigenvec_tracer(vertmode, z_tomcat) ;
+	double var_vspec_tracer(x_tomcat, y_tomcat, vertmode) ;
+	double std_vspec_tracer(x_tomcat, y_tomcat, vertmode) ;
+	double vert_adjust_tracer(x_tomcat, y_tomcat, z_tomcat) ;
+	int temporal_covs(fluxfield) ;
+	int temporal_cor_tpe(fluxfield) ;
+	double timescale_flux(fluxfield) ;
+	double temporalcors_flux(fluxfield, month) ;
+	double temp_cor_matrix(fluxfield, month, month) ;
+	double temp_eigenvec_flux(fluxfield, timescale, month) ;
+	double var_tspec_flux(fluxfield, month) ;
+	double std_tspec_flux(fluxfield, month) ;
+}

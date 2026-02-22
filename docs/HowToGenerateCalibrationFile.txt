@@ -1,0 +1,34 @@
+The toy source/sink program needs a CVT file, which is generated with the same FORTRAN program used for the INVICAT system.  Some special options are needed for use with the toy system.
+
+The calibration program is at
+/home/ross/DataAssim/SourceSink/TOPCAT/Invicat_v3.0rnb_Jasmin/src/CVT_offline/Calibration.f90
+
+Here are the settings that need to be made to this file
+
+If temporal correlations (for the source/sink field) are required
+CVT_TemporalCors % temporal_covs(field) = 1
+otherwise
+CVT_TemporalCors % temporal_covs(field) = 0
+
+Set the standard deviation of the source/sink field, e.g.
+CVT_std % std_flux(1:ylat, 1:ylon, 1:nmonth, field) = 2.0
+
+The next file to edit is
+/home/ross/DataAssim/SourceSink/TOPCAT/Invicat_v3.0rnb_Jasmin/src/module/main_data.f90
+
+Make sure that (for L=32, and for number of months 3)
+ylon=64, ylat=32, ylev=35
+nmonth=3
+
+The next file to edit is
+/home/ross/DataAssim/SourceSink/TOPCAT/Invicat_v3.0rnb_Jasmin/src/module/onedvar_data.f90
+vert_covs = 3
+
+Go back to the directory containing the Calibration.90 file and run
+make Calibration.out
+
+and run
+
+./Calibration.out
+
+The CVT_calib.nc file can then be copied to the toy system's data directory.

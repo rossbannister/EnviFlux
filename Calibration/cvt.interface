@@ -1,0 +1,113 @@
+INTERFACE
+  !=================================================================================================
+  SUBROUTINE cvt_h (chi,           & ! IN  Control variable
+                    chi_th_flux,   & ! OUT Version of chi (for flux) between temp and horiz transforms
+                    chi_vh_tracer, & ! OUT Version of chi (for tracer) between vert and horiz transforms
+                    do_flux,       & ! IN  true/false to deal with 2D+time flux field
+                    do_tracer,     & ! IN  true/false to deal with 3D intial tracer field
+                    do_nlevs,      & ! IN, OPTIONAL to do transform on first nlevs only (tracer)
+                    do_nmonths)      ! IN, OPTIONAL to do transform on first nlevs only (flux)
+
+  USE main_data,    ONLY: ylon, ylat, ylev, nmonth, nfields
+
+  USE onedvar_data, ONLY: n1d
+
+  IMPLICIT NONE
+  ! Arguments:
+  REAL,              INTENT(IN)  :: chi(1:n1d)
+  REAL,              INTENT(OUT) :: chi_th_flux(1:ylat, 1:ylon, 1:nmonth, 1:nfields)
+  REAL,              INTENT(OUT) :: chi_vh_tracer(1:ylat, 1:ylon, 1:ylev)
+  LOGICAL,           INTENT(IN)  :: do_flux
+  LOGICAL,           INTENT(IN)  :: do_tracer
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nlevs
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nmonths
+
+  END SUBROUTINE cvt_h
+
+
+
+
+  !=================================================================================================
+  SUBROUTINE cvt_h_adj (chi_hat,           & ! OUT Control variable
+                        chi_th_flux_hat,   & ! IN  Version of chi (for flux) between temp and horiz transforms
+                        chi_vh_tracer_hat, & ! IN  Version of chi (for tracer) between vert and horiz transforms
+                        do_flux,           & ! IN  true/false to deal with 2D+time flux field
+                        do_tracer,         & ! IN  true/false to deal with 3D intial tracer field
+                        do_nlevs,          & ! IN, OPTIONAL to do transform on first nlevs only (tracer)
+                        do_nmonths)          ! IN, OPTIONAL to do transform on first nlevs only (flux)
+
+  USE main_data,    ONLY: ylon, ylat, ylev, nmonth, nfields
+
+  USE onedvar_data, ONLY: n1d
+
+  IMPLICIT NONE
+  ! Arguments:
+  REAL,              INTENT(OUT) :: chi_hat(1:n1d)
+  REAL,              INTENT(IN)  :: chi_th_flux_hat(1:ylat, 1:ylon, 1:nmonth, 1:nfields)
+  REAL,              INTENT(IN)  :: chi_vh_tracer_hat(1:ylat, 1:ylon, 1:ylev)
+  LOGICAL,           INTENT(IN)  :: do_flux
+  LOGICAL,           INTENT(IN)  :: do_tracer
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nlevs
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nmonths
+
+  END SUBROUTINE cvt_h_adj
+
+
+
+  !=================================================================================================
+  SUBROUTINE cvt_h_inv (chi,               & ! OUT Control variable
+                        chi_th_flux,       & ! IN  Version of chi (for flux) between temp and horiz transforms
+                        chi_vh_tracer,     & ! IN  Version of chi (for tracer) between vert and horiz transforms
+                        do_flux,           & ! IN  true/false to deal with 2D+time flux field
+                        do_tracer,         & ! IN  true/false to deal with 3D intial tracer field
+                        do_nlevs,          & ! IN, OPTIONAL to do transform on first nlevs only (tracer)
+                        do_nmonths)          ! IN, OPTIONAL to do transform on first nlevs only (flux)
+
+  USE main_data,    ONLY: ylon, ylat, ylev, nmonth, nfields
+
+  USE onedvar_data, ONLY: n1d
+
+  IMPLICIT NONE
+
+  ! Arguments:
+  REAL,              INTENT(OUT) :: chi(1:n1d)
+  REAL,              INTENT(IN)  :: chi_th_flux(1:ylat, 1:ylon, 1:nmonth, 1:nfields)
+  REAL,              INTENT(IN)  :: chi_vh_tracer(1:ylat, 1:ylon, 1:ylev)
+  LOGICAL,           INTENT(IN)  :: do_flux
+  LOGICAL,           INTENT(IN)  :: do_tracer
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nlevs
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nmonths
+
+  END SUBROUTINE cvt_h_inv
+
+
+
+
+
+  !=================================================================================================
+  SUBROUTINE cvt_h_inv_adj (chi_hat,               & ! IN  Control variable
+                            chi_th_flux_hat,       & ! OUT Version of chi (for flux) between temp and horiz transforms
+                            chi_vh_tracer_hat,     & ! OUT Version of chi (for tracer) between vert and horiz transforms
+                            do_flux,               & ! IN  true/false to deal with 2D+time flux field
+                            do_tracer,             & ! IN  true/false to deal with 3D intial tracer field
+                            do_nlevs,              & ! IN, OPTIONAL to do transform on first nlevs only (tracer)
+                            do_nmonths)              ! IN, OPTIONAL to do transform on first nlevs only (flux)
+
+  USE main_data,    ONLY: ylon, ylat, ylev, nmonth, nfields
+
+  USE onedvar_data, ONLY: n1d
+
+  IMPLICIT NONE
+
+  ! Arguments:
+  REAL,              INTENT(IN)  :: chi_hat(1:n1d)
+  REAL,              INTENT(OUT) :: chi_th_flux_hat(1:ylat, 1:ylon, 1:nmonth, 1:nfields)
+  REAL,              INTENT(OUT) :: chi_vh_tracer_hat(1:ylat, 1:ylon, 1:ylev)
+  LOGICAL,           INTENT(IN)  :: do_flux
+  LOGICAL,           INTENT(IN)  :: do_tracer
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nlevs
+  INTEGER, OPTIONAL, INTENT(IN)  :: do_nmonths
+
+  END SUBROUTINE cvt_h_inv_adj
+
+END INTERFACE

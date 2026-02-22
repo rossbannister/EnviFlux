@@ -1,0 +1,119 @@
+INTERFACE
+  SUBROUTINE CVT_matrices_output (filename,              &
+                             ! ***** Longitudes, latitudes, and heights
+                                  TOMCAT_longs,          & ! Longitudes of TOMCAT grid
+                                  TOMCAT_lats,           & ! Latitudes of TOMCAT grid
+                                  TOMCAT_alts,           & ! Altitudes of TOMCAT grid
+                                  SHtools_longs,         & ! Longitudes of SHtools grid
+                                  SHtools_lats,          & ! Latitudes of SHtools grid
+                                  months,                & ! Month indices
+                                  GaussianCoLats,        & ! Gaussian co-latitudes
+                             ! ***** Spatial standard deviations
+                                  FracOfPrior_tracer,    & ! Fraction of a-priori for stddev tracer
+                                  std_tracer,            & ! Standard deviation of tracer (use if above is 0.0)
+                                  FracOfPrior_flux,      & ! Fraction of a-priori for stddev flux
+                                  std_flux,              & ! Standard deviation of flux (use if above is 0.0)
+                             ! ***** Horizontal transform for tracer
+                                  horiztracer_cor_tpe,   & ! Imposed horizontal cor fn type for tracer
+                                  lengthscale_tracer,    & ! Imposed horizontal cor lengthscales
+                                  horizcors_tracer,      & ! Imposed horizontal correlation fn for tracer
+                                  var_hspec_tracer,      & ! Horizontal variances of tracer
+                                  std_hspec_tracer,      & ! Horizontal standard deviations of tracer
+                             ! ***** Horizontal transform for flux
+                                  horizflux_cor_tpe,     & ! Imposed horizontal cor fn type for flux
+                                  lengthscale_flux,      & ! Imposed horizontal cor lengthscales
+                                  horizcors_flux,        & ! Imposed horizontal correlation fn for flux
+                                  var_hspec_flux,        & ! Horizontal variances of flux
+                                  std_hspec_flux,        & ! Horizontal standard deviations of flux
+                             ! ***** Vertical transform for tracer
+                                  ForceVCorr,            & ! Switch to set if vertical correlations are enforced
+                                  vert_covs,             & ! Option to switch dependency of vert eigenvals
+                                  glob_av_vert_cov,      & ! Global av vertical covariance matrix
+                                  vert_eigenvec_tracer,  & ! Global vertical eigenvectors
+                                  var_vspec_tracer,      & ! Vertical variances
+                                  std_vspec_tracer,      & ! Vertical standard deviations
+                                  vert_adjust_tracer,    & ! Adjustment for vertical transform
+                             ! ***** Temporal transform for flux
+                                  temporal_covs,         & ! Option for temporal flux covariances
+                                  temporal_cor_tpe,      & ! Imposed temporal correlation fn type
+                                  timescale_flux,        & ! Imposed flux correlation timescales
+                                  temporalcors_flux,     & ! Imposed temporal correlation fn
+                                  temp_cor_matrix,       & ! Imposed temporal correlation matrix
+                                  temp_eigenvec_flux,    & ! Eigenvectors of temporal cor fns
+                                  var_tspec_flux,        & ! Eigenvalues of temporal cor fn
+                                  std_tspec_flux )         ! Square-root of eigenvalues
+
+  !********************************************************
+  !* Subroutine to write the CVT matrices                 *
+  !*                                                      *
+  !*                                                      *
+  !* R. Bannister, 21-11-19                               *
+  !* Tweaks, R. Bannister, July 2021                      *
+  !*                                                      *
+  !********************************************************
+
+  USE main_data,    ONLY: ylon, ylat, ylev, nmonth, nfields
+
+  USE onedvar_data, ONLY: L
+
+
+  IMPLICIT NONE
+
+  ! NetCDF library (file format used to read/write data)
+  !----------------------------------------------------
+  ! INCLUDE '/usr/include/netcdf.inc'
+  INCLUDE 'netcdf.inc'
+
+  !Declare parameters
+  !------------------
+  ! ***** Longitudes, latitudes, and heights
+  CHARACTER(LEN=*), INTENT(IN)  :: filename
+  REAL,             INTENT(IN)  :: TOMCAT_longs(1:ylon)
+  REAL,             INTENT(IN)  :: TOMCAT_lats(1:ylat)
+  REAL,             INTENT(IN)  :: TOMCAT_alts(1:ylev)
+  REAL,             INTENT(IN)  :: SHtools_longs(1:2*L+1)
+  REAL,             INTENT(IN)  :: SHtools_lats(1:L+1)
+  REAL,             INTENT(IN)  :: months(1:nmonth)
+  REAL,             INTENT(IN)  :: GaussianCoLats(1:L+1)
+
+  ! ***** Spatial standard deviations
+  REAL,             INTENT(IN)  :: FracOfPrior_tracer
+  REAL,             INTENT(IN)  :: std_tracer(1:ylat, 1:ylon, 1:ylev)
+  REAL,             INTENT(IN)  :: FracOfPrior_flux
+  REAL,             INTENT(IN)  :: std_flux(1:ylat, 1:ylon, 1:nmonth, 1:nfields)
+  ! ***** Horizontal transform for tracer
+  INTEGER,          INTENT(IN)  :: horiztracer_cor_tpe
+  REAL,             INTENT(IN)  :: lengthscale_tracer(1:ylev)
+  REAL,             INTENT(IN)  :: horizcors_tracer(1:L+1, 1:ylev)
+  REAL,             INTENT(IN)  :: var_hspec_tracer(0:L, 1:ylev)
+  REAL,             INTENT(IN)  :: std_hspec_tracer(0:L, 1:ylev)
+  ! ***** Horizontal transform for flux
+  INTEGER,          INTENT(IN)  :: horizflux_cor_tpe(1:nfields)
+  REAL,             INTENT(IN)  :: lengthscale_flux(1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: horizcors_flux(0:L, 1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: var_hspec_flux(0:L, 1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: std_hspec_flux(0:L, 1:nmonth, 1:nfields)
+
+  ! ***** Vertical transform for tracer
+  LOGICAL,          INTENT(IN)  :: ForceVCorr
+  INTEGER,          INTENT(IN)  :: vert_covs
+  REAL,             INTENT(IN)  :: glob_av_vert_cov(1:ylev, 1:ylev)
+  REAL,             INTENT(IN)  :: vert_eigenvec_tracer(1:ylev, 1:ylev)
+  REAL,             INTENT(IN)  :: var_vspec_tracer(1:ylev, 1:ylat, 1:ylon)
+  REAL,             INTENT(IN)  :: std_vspec_tracer(1:ylev, 1:ylat, 1:ylon)
+  REAL,             INTENT(IN)  :: vert_adjust_tracer(1:ylev, 1:ylat, 1:ylon)
+
+  ! ***** Temporal transform for flux
+  INTEGER,          INTENT(IN)  :: temporal_covs(1:nfields)
+  INTEGER,          INTENT(IN)  :: temporal_cor_tpe(1:nfields)
+  REAL,             INTENT(IN)  :: timescale_flux(1:nfields)
+  REAL,             INTENT(IN)  :: temporalcors_flux(1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: temp_cor_matrix(1:nmonth, 1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: temp_eigenvec_flux(1:nmonth, 1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: var_tspec_flux(1:nmonth, 1:nfields)
+  REAL,             INTENT(IN)  :: std_tspec_flux(1:nmonth, 1:nfields)
+
+
+  END SUBROUTINE cvt_matrices_output
+
+END INTERFACE
